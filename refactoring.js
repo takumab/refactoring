@@ -1,11 +1,12 @@
-const invoice = require('./invoices.json');
+const [invoice] = require('./invoices.json');
 const plays = require('./plays.json');
 
 function statement(invoice, plays) {
     let totalAmount = 0;
     let volumeCredits = 0;
-    let result = `Statement for ${invoice.customer}`;
-    const format = new Intl.NumberFormat("en-US", {style: "currency", currency: "US", maximumFractionDigits: 2}).format;
+    let result = `Statement for ${invoice.customer}\n`;
+    const format = new Intl.NumberFormat("en-US", {style: "currency", currency: "USD", maximumFractionDigits: 2}).format;
+
     for (let perf of invoice.performances) {
         const play = plays[perf.playID];
         let thisAmount = 0;
@@ -20,7 +21,7 @@ function statement(invoice, plays) {
             case "comedy":
                 thisAmount = 30000;
                 if (perf.audience > 20) {
-                    thisAmount += 1000 * (perf.audience - 30);
+                    thisAmount += 10000 + 500 * (perf.audience - 20);
                 }
                 thisAmount += 300 * perf.audience;
                 break;
@@ -39,3 +40,5 @@ function statement(invoice, plays) {
     result += `You earned ${volumeCredits} credits\n`;
     return result;
 }
+
+console.log(statement(invoice, plays));
