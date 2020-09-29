@@ -43,4 +43,4 @@ function statement(invoice, plays) {
     return result;
 }
 
-console.log(statement(invoice, plays));
+module.exports = statement;
