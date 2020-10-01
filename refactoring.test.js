@@ -10,7 +10,8 @@ Othello: $500.00 (40 seats)
 Amount owed is $1,730.00
 You earned 47 credits
 `
-    it('should return invoice statement', function () {
-        expect(statement(invoice, plays)).toBe(expected);
+    it('should return order statement', function () {
+        const actual = statement(invoice, plays);
+        expect(actual).toBe(expected);
     });
 });
